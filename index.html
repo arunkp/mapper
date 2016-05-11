@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Mapper Tool</title>
+  <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+  <link rel="stylesheet" href="example.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/leaflet.awesome-markers.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+  <script src='js/mapbox.js'></script>
+  <link rel="stylesheet" href="css/animate.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class="info-box expanded">
+      <header>
+        <span class="info-title add hidden">Add Marker</span>
+        <span class="info-title info">Project Info</span>
+        <span class="icos">
+          <a href="#" class="collaps"> <i class="fa fa-minus"></i> </a>
+          <a href="#" class="expand"> <i class="fa fa-chevron-down"></i> </a>
+        </span>
+      </header>
+      <div id="default" class="contain animated slideInRIght">
+        <div class="info-content">
+          <h5>Mapper implementation Project</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+      <div id="addMarker" class="contain animated slideInRight hidden">
+        <form>
+          <!-- <div class="form-group">
+            <div class="input-group">
+              <input id="address" type="text" class="form-control" placeholder="Search Address">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+            <p class="help-block">To add a marker, click and drag the marker to your desired location or search by address.</p>
+          </div> -->
+          <div class="form-group">
+            <div class='pad1' id='app'></div>
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title of the place">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" placeholder="Description about the place" id="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo">
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-success" id="saved">Save Place</button>
+          </div>
+        </form>
+      </div>
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add a comment</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="">Comment</label>
+              <textarea id="comment" class="form-control" rows="3" placeholder="Type your comment here..."></textarea>
+            </div>
+          </form>
+          <div class="comments"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <h6>Category Available</h6>
+    <ul>
+      <li><i class="fa fa-bicycle"></i> BiCycle</li>
+      <li><i class="fa fa-automobile"></i> Automobile</li>
+      <li><i class="fa fa-child"></i> Child</li>
+    </ul>
+  </div>
+  <!-- <div class="text-center add-btn">
+    <div class="dropup">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Add Marker
+        <span class="caret"></span>
+      </button>
+      <button type="button" class="btn hidden btn-danger" name="button" id="cancelMark">Cancel <i class="fa fa-remove"></i></button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a data-id="red" href="#"><i class="fa fa-bicycle"></i> BiCycle</a></li>
+        <li><a data-id="blue" href="#"><i class="fa fa-automobile"></i> Automobile</a></li>
+        <li><a data-id="green" href="#"><i class="fa fa-child"></i> Child</a></li>
+      </ul>
+    </div>
+  </div> -->
+  <div id="box">Drag Marker on the map:
+		<span class="poi-type"><img class="drag" type="tree" src="icons/tree_green.png" alt="TREE: green" />Tree</span>
+		<span class="poi-type"><img class="drag" type="red" src="icons/poi_red.png" alt="POI: red" />Red</span>
+		<span class="poi-type"><img class="drag" type="black" src="icons/poi_black.png" alt="POI: black" />Black</span>
+	</div>
+<div id='map-leaflet' class='map'> </div>
+<script src='bundle.js'></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/leaflet.awesome-markers.min.js"></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
+<script src='js/leaflet.draw.js'></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<script type="text/javascript" src="js/custom.js"></script>
+</body>
+</html>
