@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Mapper Tool</title>
+  <link href="./Mapper Tool_files/base.css" rel="stylesheet">
+  <link rel="stylesheet" href="./Mapper Tool_files/example.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="./Mapper Tool_files/ionicons.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="./Mapper Tool_files/leaflet.awesome-markers.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="./Mapper Tool_files/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+  <script src="./Mapper Tool_files/mapbox.js"></script>
+  <link rel="stylesheet" href="./Mapper Tool_files/animate.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="./Mapper Tool_files/jquery-ui.css">
+  <link href="./Mapper Tool_files/mapbox.css" rel="stylesheet">
+  <link href="./Mapper Tool_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="./Mapper Tool_files/master.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class="info-box expanded">
+      <header>
+        <span class="info-title add hidden">Add Marker</span>
+        <span class="info-title info">Project Info</span>
+        <span class="icos">
+          <a href="http://localhost:3000/#" class="collaps"> <i class="fa fa-minus"></i> </a>
+          <a href="http://localhost:3000/#" class="expand"> <i class="fa fa-chevron-down"></i> </a>
+        </span>
+      </header>
+      <div id="default" class="contain animated slideInRIght">
+        <div class="info-content">
+          <h5>Mapper implementation Project</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+      <div id="addMarker" class="contain animated slideInRight hidden">
+        <form>
+          <!-- <div class="form-group">
+            <div class="input-group">
+              <input id="address" type="text" class="form-control" placeholder="Search Address">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+            <p class="help-block">To add a marker, click and drag the marker to your desired location or search by address.</p>
+          </div> -->
+          <div class="form-group">
+            <div class="pad1" id="app"><div data-reactid=".0"><div class="clearfix pad1" data-reactid=".0.0"><div data-reactid=".0.0.0"><input class="" placeholder="Search" type="text" data-reactid=".0.0.0.0"></div></div></div></div>
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title of the place">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" placeholder="Description about the place" id="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo">
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-success" id="saved">Save Place</button>
+          </div>
+        </form>
+      </div>
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add a comment</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="">Comment</label>
+              <textarea id="comment" class="form-control" rows="3" placeholder="Type your comment here..."></textarea>
+            </div>
+          </form>
+          <div class="comments"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <h6>Category Available</h6>
+    <ul>
+      <li><i class="fa fa-bicycle"></i> BiCycle</li>
+      <li><i class="fa fa-automobile"></i> Automobile</li>
+      <li><i class="fa fa-child"></i> Child</li>
+    </ul>
+  </div>
+  <!-- <div class="text-center add-btn">
+    <div class="dropup">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Add Marker
+        <span class="caret"></span>
+      </button>
+      <button type="button" class="btn hidden btn-danger" name="button" id="cancelMark">Cancel <i class="fa fa-remove"></i></button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a data-id="red" href="#"><i class="fa fa-bicycle"></i> BiCycle</a></li>
+        <li><a data-id="blue" href="#"><i class="fa fa-automobile"></i> Automobile</a></li>
+        <li><a data-id="green" href="#"><i class="fa fa-child"></i> Child</a></li>
+      </ul>
+    </div>
+  </div> -->
+  <div id="box">Drag Marker on the map:
+		<span class="poi-type"><img class="drag ui-draggable" type="tree" src="./Mapper Tool_files/tree_green.png" alt="TREE: green">Tree</span>
+		<span class="poi-type"><img class="drag ui-draggable" type="red" src="./Mapper Tool_files/poi_red.png" alt="POI: red">Red</span>
+		<span class="poi-type"><img class="drag ui-draggable" type="black" src="./Mapper Tool_files/poi_black.png" alt="POI: black">Black</span>
+	</div>
+<div id="map-leaflet" class="map leaflet-container leaflet-retina leaflet-fade-anim" tabindex="0"> <div class="leaflet-map-pane" style="transform: translate3d(0px, -22px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/118@2x.png" style="height: 256px; width: 256px; left: 314px; top: 48px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/118@2x(1).png" style="height: 256px; width: 256px; left: 58px; top: 48px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/117@2x.png" style="height: 256px; width: 256px; left: 314px; top: -208px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/117@2x(1).png" style="height: 256px; width: 256px; left: 58px; top: -208px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/119@2x.png" style="height: 256px; width: 256px; left: 58px; top: 304px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/119@2x(1).png" style="height: 256px; width: 256px; left: 314px; top: 304px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/118@2x(2).png" style="height: 256px; width: 256px; left: -198px; top: 48px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/118@2x(3).png" style="height: 256px; width: 256px; left: 570px; top: 48px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/119@2x(2).png" style="height: 256px; width: 256px; left: -198px; top: 304px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/117@2x(2).png" style="height: 256px; width: 256px; left: -198px; top: -208px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/117@2x(3).png" style="height: 256px; width: 256px; left: 570px; top: -208px;"><img class="leaflet-tile leaflet-tile-loaded" src="./Mapper Tool_files/119@2x(3).png" style="height: 256px; width: 256px; left: 570px; top: 304px;"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"></div><div class="leaflet-marker-pane"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"></div><div class="leaflet-top leaflet-right"><div class="leaflet-control-grid map-tooltip leaflet-control" style="display: none;"><a class="close" href="http://localhost:3000/#" title="close">close</a><div class="map-tooltip-content"></div></div></div><div class="leaflet-bottom leaflet-left"><div class="mapbox-logo leaflet-control mapbox-logo-true"></div></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-draw leaflet-control"><div class="leaflet-draw-section"><div class="leaflet-draw-toolbar leaflet-bar leaflet-draw-toolbar-top"><a class="leaflet-draw-draw-polyline" href="http://localhost:3000/#" title="Draw a polyline"></a><a class="leaflet-draw-draw-polygon" href="http://localhost:3000/#" title="Draw a polygon"></a></div><ul class="leaflet-draw-actions"></ul></div><div class="leaflet-draw-section"><div class="leaflet-draw-toolbar leaflet-bar"><a class="leaflet-draw-edit-edit leaflet-disabled" href="http://localhost:3000/#" title="No layers to edit."></a><a class="leaflet-draw-edit-remove leaflet-disabled" href="http://localhost:3000/#" title="No layers to delete."></a></div><ul class="leaflet-draw-actions"></ul></div></div><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="http://localhost:3000/#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="http://localhost:3000/#" title="Zoom out">-</a></div><div class="map-legends wax-legends leaflet-control" style="display: none;"></div><div class="leaflet-control-attribution leaflet-control"><a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="https://openstreetmap.org/about/" target="_blank">© OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#mapbox.streets/77.594/12.970/8" target="_blank">Improve this map</a></div></div></div></div>
+<script src="./Mapper Tool_files/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+<script src="./Mapper Tool_files/bundle.js"></script>
+<script type="text/javascript" src="./Mapper Tool_files/jquery.js"></script>
+<script src="./Mapper Tool_files/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./Mapper Tool_files/leaflet.awesome-markers.min.js"></script>
+<link href="./Mapper Tool_files/leaflet.draw.css" rel="stylesheet">
+<script src="./Mapper Tool_files/leaflet.draw.js"></script>
+<script src="./Mapper Tool_files/jquery-ui.js"></script>
+<script src="./Mapper Tool_files/leaflet.markercluster.js"></script>
+<link href="./Mapper Tool_files/MarkerCluster.css" rel="stylesheet">
+<link href="./Mapper Tool_files/MarkerCluster.Default.css" rel="stylesheet">
+<script type="text/javascript" src="./Mapper Tool_files/custom.js"></script>
+<script type="text/javascript">
+socket.on('MarkerDrop', function(markerObj){
+  console.log("what the fuck");
+  window.marked = markerObj;
+  insertPoint(markerObj[0], markerObj[1], false);
+});
+</script>
+
+
+</body></html>

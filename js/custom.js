@@ -1,6 +1,6 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiaWFydW5rcCIsImEiOiJjaW5maWo0YTgweTdodmdrdjNpMHRzanNsIn0.QxBfqwHA03To6IdiLa3jpQ';
 var mapLeaflet = L.mapbox.map('map-leaflet', 'mapbox.streets', { zoomControl: false }).setView([12.971599, 77.594563], 8);
-var prevMarker, polygon = {}, latlngx;
+var prevMarker, polygon = {}, latlngx, cord = [];
 // (function(){
   var data;
   var markers = L.markerClusterGroup();
@@ -12,7 +12,8 @@ var prevMarker, polygon = {}, latlngx;
 		        shadowUrl: 'icons/poi_shadow.png',
 		        shadowSize: [22,13],
 		        shadowAnchor: [-31,-19],
-		        popupAnchor: [32,-2]
+		        popupAnchor: [32,-2],
+            className: "animated fadeIn"
 		    }
 		});
 		var blackIcon = new poiIcon({iconUrl:'icons/poi_black.png'});
@@ -70,10 +71,12 @@ var prevMarker, polygon = {}, latlngx;
     console.log(this.getLatLng());
   }
 
-  function insertPoint(position,options) {
-      $(".info-box .info-title, .info-box .contain, .dropup .dropdown-toggle").addClass("hidden");
-      $(".dropup #cancelMark, .info-box .info-title.add").removeClass("hidden");
-      $("#addMarker").removeClass("hidden");
+  function insertPoint(position,options,saveOption=true) {
+      if(saveOption) {
+        $(".info-box .info-title, .info-box .contain, .dropup .dropdown-toggle").addClass("hidden");
+        $(".dropup #cancelMark, .info-box .info-title.add").removeClass("hidden");
+        $("#addMarker").removeClass("hidden");
+      }
       var point = L.marker(position,options).on("click", markerClick).addTo(mapLeaflet);
       markers.addLayer(point);
       prevMarker = point;
@@ -125,12 +128,20 @@ $("#saved").on("click", function(e){
 						icon: eval(ui.helper.attr('type') + 'Icon'),
 						draggable: true
 					};
+          console.log(eval(ui.helper.attr('type') + 'Icon'));
+          var options2 = {
+            type: ui.helper.attr('type'),
+            icon: eval(ui.helper.attr('type') + 'Icon'),
+            draggable: false
+          }
+          var latlng = mapLeaflet.containerPointToLatLng([ui.offset.left, ui.offset.top]);
           if(polygon.hasOwnProperty('_latlngs')) {
             if(MarkerInPolygon(mapLeaflet.containerPointToLatLng([ui.offset.left, ui.offset.top]), polygon.getLatLngs())){
               console.log("yes, inside the polygon Area.");
               insertPoint(
     						mapLeaflet.containerPointToLatLng([ui.offset.left, ui.offset.top]),
-    						options
+    						options,
+                true
     					);
               latlngx = mapLeaflet.containerPointToLatLng([ui.offset.left, ui.offset.top]);
               $(".drag").draggable({ disabled: true });
@@ -141,10 +152,13 @@ $("#saved").on("click", function(e){
           }else {
             insertPoint(
               mapLeaflet.containerPointToLatLng([ui.offset.left, ui.offset.top]),
-              options
+              options,
+              true
             );
             $(".drag").draggable({ disabled: true });
             $(".drag").draggable("disable");
+            var markerObj = [latlng , options];
+            socket.emit('MarkerDrop', markerObj);
           }
 				}
 			});

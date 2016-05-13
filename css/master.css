@@ -144,3 +144,12 @@ box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   font-size: 14px;
   font-weight: normal;
 }
+
+/*.leaflet-marker-pane img:last-child {
+  -webkit-animation-name: bounce !important;
+  animation-name: bounce !important;
+  -webkit-transform-origin: center bottom !important;
+  transform-origin: center bottom !important;
+  -webkit-animation-delay: 10s !important;
+    animation-delay: 10s !important;
+}*/

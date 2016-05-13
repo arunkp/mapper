@@ -111,11 +111,15 @@
     </div>
   </div> -->
   <div id="box">Drag Marker on the map:
-		<span class="poi-type"><img class="drag" type="tree" src="icons/tree_green.png" alt="TREE: green" />Tree</span>
-		<span class="poi-type"><img class="drag" type="red" src="icons/poi_red.png" alt="POI: red" />Red</span>
-		<span class="poi-type"><img class="drag" type="black" src="icons/poi_black.png" alt="POI: black" />Black</span>
+		<span class="poi-type"><img class="drag animated bounce" type="tree" src="icons/tree_green.png" alt="TREE: green" />Tree</span>
+		<span class="poi-type"><img class="drag animated bounce" type="red" src="icons/poi_red.png" alt="POI: red" />Red</span>
+		<span class="poi-type"><img class="drag animated bounce" type="black" src="icons/poi_black.png" alt="POI: black" />Black</span>
 	</div>
 <div id='map-leaflet' class='map'> </div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
 <script src='bundle.js'></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -126,6 +130,25 @@
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<script type="text/javascript" src="js/bouncemarker.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript">
+socket.on('MarkerDrop', function(markerObj){
+  var icon_name = markerObj[1].type + "Icon";
+  if(icon_name == "treeIcon") {
+    L.marker(markerObj[0],{icon: treeIcon, bounceOnAdd: true,
+    bounceOnAddOptions: {duration: 500, height: 100},
+    bounceOnAddCallback: function() {console.log("done");}}).on("click", markerClick).addTo(mapLeaflet);
+  }else if(icon_name == "blackIcon") {
+    L.marker(markerObj[0],{icon: blackIcon, bounceOnAdd: true,
+    bounceOnAddOptions: {duration: 500, height: 100},
+    bounceOnAddCallback: function() {console.log("done");}}).on("click", markerClick).addTo(mapLeaflet);
+  }else if(icon_name == "redIcon") {
+    L.marker(markerObj[0],{icon: redIcon, bounceOnAdd: true,
+    bounceOnAddOptions: {duration: 500, height: 100},
+    bounceOnAddCallback: function() {console.log("done");}}).on("click", markerClick).addTo(mapLeaflet);
+  }
+});
+</script>
 </body>
 </html>
